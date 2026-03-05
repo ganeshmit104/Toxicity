@@ -1,2 +1,0 @@
-# Toxicity
-Food Scanner
