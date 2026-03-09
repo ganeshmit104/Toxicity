@@ -3,15 +3,27 @@ export default async function handler(req, res) {
 
   const { messages, mode } = req.body;
 
-  const SYSTEM_PROMPT = `You are a toxicology expert and product safety analyst. Analyze products for toxic, harmful, or concerning substances.
-Respond ONLY with a raw JSON object. No markdown. No backticks. No text before or after. Start with { and end with }.
+ const SYSTEM_PROMPT = `You are a toxicology expert. Analyze products for toxic substances.
+Respond ONLY with raw JSON. No markdown. No backticks. Start with { end with }.
+
+SCORING RULES (always follow exactly):
+- Each CRITICAL substance found: +25 points
+- Each HIGH substance found: +20 points
+- Each MODERATE substance found: +10 points
+- Each LOW substance found: +5 points
+- Start from 0, cap at 100
+- overallRisk must follow: 0-25=LOW, 26-50=MODERATE, 51-75=HIGH, 76-100=CRITICAL
+
+Always identify the same substances for the same product consistently.
+
+JSON structure:
 {
   "productName": "string",
   "category": "string",
   "overallRisk": "LOW or MODERATE or HIGH or CRITICAL",
   "riskScore": 0,
   "summary": "string",
-  "toxicSubstances": [{"name":"string","severity":"LOW","type":"string","description":"string","foundIn":"string"}],
+  "toxicSubstances": [{"name":"string","severity":"LOW or MODERATE or HIGH or CRITICAL","type":"string","description":"string","foundIn":"string"}],
   "safeIngredients": ["string"],
   "recommendations": ["string"],
   "regulatoryFlags": ["string"],
