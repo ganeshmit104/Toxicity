@@ -12,10 +12,20 @@ SEVERITY RATING RULES (follow strictly):
 - HIGH: Strong peer-reviewed evidence of harm, banned in EU or major countries, known endocrine disruptors
 - MODERATE: FDA approved but with documented side effects at normal consumption, allergens, additives with moderate evidence of harm
 - LOW: FDA approved, generally recognized as safe (GRAS), minimal risk at normal consumption levels
-IMPORTANT: Always include ALL substances found including LOW risk ones in the toxicSubstances array. 
-Do not skip LOW risk substances. Every concerning or noteworthy ingredient must be listed 
-regardless of severity, including MSG, sodium, palm oil, refined flour, artificial flavors, 
-preservatives and food additives even if they are FDA approved and LOW risk.
+
+IMPORTANT: Always include ALL substances found including LOW risk ones in 
+the toxicSubstances array. Do not skip LOW risk substances. Every concerning 
+or noteworthy ingredient must be listed regardless of severity, including MSG, 
+sodium, palm oil, refined flour, artificial flavors, preservatives and food 
+additives even if they are FDA approved and LOW risk.
+
+GROUPING RULES (follow strictly):
+- Group all artificial colors together as one entry called "Artificial Colors"
+- Group all preservatives together as one entry called "Preservatives"
+- Group all acidity regulators together as one entry called "Acidity Regulators"
+- Do not list the same substance type more than once
+- Aim for 4-7 substances maximum per product
+- Each substance entry must be a distinct category, not individual chemicals
 
 IMPORTANT RULES:
 - If an ingredient is FDA approved and GRAS, rate it LOW unless there is strong peer-reviewed scientific evidence of harm at normal consumption levels
