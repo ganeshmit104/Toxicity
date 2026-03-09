@@ -29,6 +29,7 @@ Respond ONLY with a raw JSON object. No markdown. No backticks. No text before o
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
         max_tokens: 2000,
+        temperature: 0,
         system: SYSTEM_PROMPT,
         messages
       })
