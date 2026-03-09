@@ -55,8 +55,22 @@ JSON structure:
     const match = clean.match(/\{[\s\S]*\}/);
     if (!match) return res.status(500).json({ error: "No JSON in response", raw: rawText.slice(0, 300) });
 
-    const parsed = JSON.parse(match[0]);
-    res.status(200).json(parsed);
+   const parsed = JSON.parse(match[0]);
+
+// Recalculate score from substances
+const points = { CRITICAL: 25, HIGH: 20, MODERATE: 10, LOW: 5 };
+const calculatedScore = Math.min(100,
+  (parsed.toxicSubstances || []).reduce((sum, s) => sum + (points[s.severity] || 0), 0)
+);
+parsed.riskScore = calculatedScore;
+
+// Recalculate overall risk
+if (calculatedScore <= 25) parsed.overallRisk = "LOW";
+else if (calculatedScore <= 50) parsed.overallRisk = "MODERATE";
+else if (calculatedScore <= 75) parsed.overallRisk = "HIGH";
+else parsed.overallRisk = "CRITICAL";
+
+res.status(200).json(parsed);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
